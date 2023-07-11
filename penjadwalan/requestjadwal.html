@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Halaman Permintaan Jadwal</title>
+  <script>
+    function ajukanPerubahan() {
+      // Mendapatkan nilai input dari dosen
+      var namaDosen = document.getElementById("namaDosen").value;
+      var tipeDosen = document.getElementById("tipeDosen").value;
+      var perubahanJadwal = document.getElementById("perubahanJadwal").value;
+
+      // Mengirim permintaan perubahan jadwal ke server menggunakan AJAX atau fetch API
+      // Misalnya, menggunakan fetch API
+      fetch('/ajukanPerubahanJadwal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          namaDosen: namaDosen,
+          tipeDosen: tipeDosen,
+          perubahanJadwal: perubahanJadwal
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Permintaan berhasil dikirim
+          alert('Permintaan perubahan jadwal berhasil dikirim!');
+          // Lakukan tindakan lain jika diperlukan
+        } else {
+          // Permintaan gagal dikirim
+          alert('Gagal mengirim permintaan perubahan jadwal. Silakan coba lagi!');
+        }
+      })
+      .catch(error => {
+        console.error('Terjadi kesalahan:', error);
+        alert('Terjadi kesalahan saat mengirim permintaan perubahan jadwal. Silakan coba lagi!');
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Halaman Permintaan Jadwal</h1>
+
+  <label for="namaDosen">Nama Dosen:</label>
+  <input type="text" id="namaDosen" name="namaDosen"><br><br>
+
+  <label for="tipeDosen">Tipe Dosen:</label>
+  <select id="tipeDosen" name="tipeDosen">
+    <option value="pembimbing">Dosen Pembimbing</option>
+    <option value="penguji">Dosen Penguji</option>
+  </select><br><br>
+
+  <label for="perubahanJadwal">Jadwal Awal :</label>
+  <input type="date" id="perubahanJadwal" name="perubahanJadwal">
+  
+  <label for="sesi">Jam :</label>
+  <select id="sesi" name="sesi">
+    <option value="07:00">07:00</option>
+    <option value="10:00">10:00</option>
+    <option value="13:00">13:00</option>
+    <option value="15:00">15:00</option>
+  </select><br><br>
+
+  <label for="perubahanJadwal">Jadwal Baru :</label>
+  <input type="date" id="perubahanJadwal" name="perubahanJadwal">
+  
+  <label for="sesi">Jam :</label>
+  <select id="sesi" name="sesi">
+    <option value="07:00">07:00</option>
+    <option value="10:00">10:00</option>
+    <option value="13:00">13:00</option>
+    <option value="15:00">15:00</option>
+  </select><br><br>
+
+  <button onclick="ajukanPerubahan()">Ajukan Perubahan Jadwal</button>
+</body>
+</html>

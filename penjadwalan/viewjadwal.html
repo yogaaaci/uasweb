@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jadwal</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .available {
+      background-color: blue;
+      color: white;
+    }
+
+    .unavailable {
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>Hari</th>
+      <th>07:00</th>
+      <th>10:00</th>
+      <th>13:00</th>
+      <th>15:00</th>
+    </tr>
+    <tr>
+      <td>Senin</td>
+      <td id="senin-07" class="available">Tersedia</td>
+      <td id="senin-10" class="available">Tersedia</td>
+      <td id="senin-13" class="unavailable">Tidak Tersedia</td>
+      <td id="senin-15" class="available">Tersedia</td>
+    </tr>
+    <tr>
+      <td>Selasa</td>
+      <td id="selasa-07" class="unavailable">Tidak Tersedia</td>
+      <td id="selasa-10" class="available">Tersedia</td>
+      <td id="selasa-13" class="available">Tersedia</td>
+      <td id="selasa-15" class="available">Tersedia</td>
+    </tr>
+    <tr>
+      <td>Rabu</td>
+      <td id="rabu-07" class="available">Tersedia</td>
+      <td id="rabu-10" class="unavailable">Tidak Tersedia</td>
+      <td id="rabu-13" class="available">Tersedia</td>
+      <td id="rabu-15" class="available">Tersedia</td>
+    </tr>
+    <tr>
+      <td>Kamis</td>
+      <td id="kamis-07" class="available">Tersedia</td>
+      <td id="kamis-10" class="available">Tersedia</td>
+      <td id="kamis-13" class="available">Tersedia</td>
+      <td id="kamis-15" class="unavailable">Tidak Tersedia</td>
+    </tr>
+    <tr>
+      <td>Jumat</td>
+      <td id="jumat-07" class="unavailable">Tidak Tersedia</td>
+      <td id="jumat-10" class="available">Tersedia</td>
+      <td id="jumat-13" class="available">Tersedia</td>
+      <td id="jumat-15" class="available">Tersedia</td>
+    </tr>
+  </table>
+
+  <script>
+    // Contoh data backend
+    const jadwal = {
+      senin: {
+        '07': true,
+        '10': true,
+        '13': false,
+        '15': true
+      },
+      selasa: {
+        '07': false,
+        '10': true,
+        '13': true,
+        '15': true
+      },
+      rabu: {
+        '07': true,
+        '10': false,
+        '13': true,
+        '15': true
+      },
+      kamis: {
+        '07': true,
+        '10': true,
+        '13': true,
+        '15': false
+      },
+      jumat: {
+        '07': false,
+        '10': true,
+        '13': true,
+        '15': true
+      }
+    };
+
+    // Fungsi untuk mengatur warna berdasarkan data backend
+    function updateJadwal() {
+      for (const hari in jadwal) {
+        for (const jam in jadwal[hari]) {
+          const elem = document.getElementById(`${hari}-${jam}`);
+          if (jadwal[hari][jam]) {
+            elem.classList.add('available');
+            elem.textContent = 'Tersedia';
+          } else {
+            elem.classList.add('unavailable');
+            elem.textContent = 'Tidak Tersedia';
+          }
+        }
+      }
+    }
+
+    // Panggil fungsi untuk mengatur warna awal
+    updateJadwal();
+  </script>
+</body>
+</html>
