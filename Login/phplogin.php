@@ -4,7 +4,7 @@ $username="root";
 $password="";
 $db = "university_db";
 
-$connect=mysql_connect($server,$username,$password);
+$connect=mysqli_connect($server,$username,$password);
 $select_db=mysqli_select_db($db);
 if($connect){
     echo "Berhasil terkoneksi";
